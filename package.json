@@ -1,0 +1,20 @@
+{
+  "name": "cannapos-thailand",
+  "version": "1.0.0",
+  "description": "Cannabis Dispensary POS System for Thailand",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "preview": "pnpm --filter web preview",
+    "lint": "pnpm --recursive lint",
+    "type-check": "pnpm --recursive type-check"
+  },
+  "keywords": ["pos", "cannabis", "thailand", "retail"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}
