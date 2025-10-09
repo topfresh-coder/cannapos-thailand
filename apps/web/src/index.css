@@ -61,10 +61,10 @@
 /* Custom touch target sizes for tablet POS */
 @layer utilities {
   .touch-target {
-    @apply min-w-[44px] min-h-[44px];
+    @apply min-h-[44px] min-w-[44px];
   }
 
   .touch-target-lg {
-    @apply min-w-[56px] min-h-[56px];
+    @apply min-h-[56px] min-w-[56px];
   }
 }

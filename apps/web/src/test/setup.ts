@@ -4,6 +4,7 @@
  */
 
 import '@testing-library/jest-dom';
+import { afterEach, vi } from 'vitest';
 
 // Reset mocks after each test
 afterEach(() => {
