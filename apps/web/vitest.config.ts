@@ -15,6 +15,9 @@ export default defineConfig({
     // Setup files to run before each test file
     setupFiles: './src/test/setup.ts',
 
+    // CSS handling - mock CSS imports to avoid PostCSS processing
+    css: false,
+
     // Coverage configuration
     coverage: {
       provider: 'v8',
