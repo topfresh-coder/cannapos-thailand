@@ -68,3 +68,67 @@
     @apply min-h-[56px] min-w-[56px];
   }
 }
+
+/* Print styles for 80mm thermal printer (Story 1.8) */
+@media print {
+  @page {
+    size: 80mm auto; /* Thermal printer width */
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+
+  /* Hide non-print elements */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Receipt page layout */
+  .receipt-page {
+    max-width: 80mm !important;
+    padding: 8px !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: white !important;
+  }
+
+  /* Receipt header */
+  .receipt-header {
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+  }
+
+  /* Line items table */
+  .receipt-items table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .receipt-items th,
+  .receipt-items td {
+    padding: 2px 4px !important;
+    text-align: left !important;
+  }
+
+  /* Totals section */
+  .receipt-totals {
+    margin-top: 8px !important;
+    padding-top: 4px !important;
+    font-weight: bold !important;
+  }
+
+  /* Remove backgrounds and borders for clean print */
+  * {
+    background: transparent !important;
+    color: black !important;
+  }
+
+  /* Keep table borders visible */
+  .receipt-items tr {
+    border-bottom: 1px solid #000 !important;
+  }
+}
