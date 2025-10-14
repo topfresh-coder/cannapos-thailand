@@ -16,12 +16,14 @@ export interface CartItem {
 interface CartState {
   items: CartItem[];
   validationErrors: Record<string, string | null>;
+  lastTransaction: { transactionId: string; timestamp: string } | null;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;
   getSubtotal: () => number;
   clear: () => void;
   setValidationError: (productId: string, error: string | null) => void;
+  setLastTransaction: (tx: { transactionId: string; timestamp: string } | null) => void;
 }
 
 /**
@@ -54,6 +56,7 @@ export const useCartStore = create<CartState>()(
     (set, get) => ({
       items: [],
       validationErrors: {},
+      lastTransaction: null,
 
       addItem: (product, quantity = 1) => {
         const { items } = get();
@@ -108,14 +111,15 @@ export const useCartStore = create<CartState>()(
 
         if (!item) return;
 
+        // Check if quantity is below minimum BEFORE validation/rounding
+        // Story 1.6 AC7: Reject negative or zero quantities, keep current quantity
+        if (quantity <= 0) {
+          get().setValidationError(productId, 'Quantity must be at least 1');
+          return; // Do NOT update quantity - keep current value
+        }
+
         // Validate and round quantity based on product type
         const validatedQuantity = validateAndRoundQuantity(quantity, item.product);
-
-        // Enforce minimum quantity of 1
-        if (validatedQuantity < 1) {
-          get().setValidationError(productId, 'Quantity must be at least 1');
-          return;
-        }
 
         // Clear validation error if quantity is valid
         get().setValidationError(productId, null);
@@ -148,6 +152,10 @@ export const useCartStore = create<CartState>()(
             [productId]: error,
           },
         }));
+      },
+
+      setLastTransaction: (tx) => {
+        set({ lastTransaction: tx });
       },
     }),
     {
