@@ -6,6 +6,11 @@ import { Toaster } from '@/components/ui/toaster';
 import LoginPage from '@/pages/LoginPage';
 import POSPage from '@/pages/POSPage';
 import ReceiptPage from '@/pages/ReceiptPage';
+import { ProductsPage } from '@/pages/ProductsPage';
+import { InventoryPage } from '@/pages/InventoryPage';
+import { ShiftsPage } from '@/pages/ShiftsPage';
+import { ReportsPage } from '@/pages/ReportsPage';
+import { DashboardPage } from '@/pages/DashboardPage';
 import './App.css';
 
 /**
@@ -30,8 +35,12 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/pos" element={<POSPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/inventory" element={<InventoryPage />} />
+              <Route path="/shifts" element={<ShiftsPage />} />
+              <Route path="/reports" element={<ReportsPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/receipt/:transactionId" element={<ReceiptPage />} />
-              {/* Future protected routes will be added here */}
             </Route>
           </Route>
 

@@ -1,0 +1,232 @@
+===============================================================================
+CLAUDE CODE SUB-AGENT DEFINITIONS
+Cannabis Dispensary POS System - BMAD Methodology
+===============================================================================
+
+This directory contains 11 ready-to-use agent definitions for Claude Code.
+Each agent is specialized for specific development tasks and integrates with
+the BMAD (Backlog Management & Agile Development) methodology.
+
+===============================================================================
+CORE DEVELOPMENT AGENTS (Required - 6 agents)
+===============================================================================
+
+1. agent-01-react-frontend-expert.txt
+   Role: React Frontend Architect
+   Specialization: React 18+, TypeScript, component architecture
+   Use When: Building React components, pages, routing, custom hooks
+   Delivers To: shadcn-ui-expert (styling), testing-qa-specialist (testing)
+
+2. agent-02-shadcn-ui-expert.txt
+   Role: UI/UX & Accessibility Specialist
+   Specialization: shadcn/ui, Tailwind CSS, WCAG 2.1 AA compliance
+   Use When: Styling components, ensuring accessibility, responsive design
+   Receives From: react-frontend-expert (component structure)
+
+3. agent-03-supabase-backend-expert.txt
+   Role: Backend Integration & Data Layer Architect
+   Specialization: Supabase, PostgreSQL, service layer, real-time subscriptions
+   Use When: Creating service modules, authentication, database operations
+   Receives From: database-schema-architect (schema)
+
+4. agent-04-state-architect.txt
+   Role: Application State Management Specialist
+   Specialization: Context API, Zustand, state persistence, real-time sync
+   Use When: Complex state management, real-time synchronization needed
+   Integrates With: supabase-backend-expert, business-logic-expert
+
+5. agent-05-business-logic-expert.txt
+   Role: Business Logic & Algorithm Specialist
+   Specialization: Calculations (tier pricing, FIFO), Zod validation, algorithms
+   Use When: Complex calculations, validation schemas, business rules
+   Delivers To: react-frontend-expert, state-architect
+
+6. agent-06-database-schema-architect.txt
+   Role: Database Design & Optimization Specialist
+   Specialization: PostgreSQL, Supabase migrations, RLS policies, indexes
+   Use When: Schema design, migrations, RLS policies, performance optimization
+   Delivers To: supabase-backend-expert (service layer)
+
+===============================================================================
+QUALITY & OPERATIONS AGENTS (Required - 2 agents)
+===============================================================================
+
+7. agent-07-testing-qa-specialist.txt
+   Role: Testing & Quality Assurance Engineer
+   Specialization: Vitest, React Testing Library, accessibility testing, RLS testing
+   Use When: After any feature implementation, before PR merge
+   Tests: All agents' deliverables
+
+8. agent-08-devops-specialist.txt
+   Role: DevOps & Deployment Engineer
+   Specialization: GitHub Actions, Vercel, Sentry, Lighthouse CI, monitoring
+   Use When: CI/CD setup, deployment, monitoring, performance budgets
+   Receives From: testing-qa-specialist (test results for deployment gates)
+
+===============================================================================
+OPTIONAL ENHANCEMENT AGENTS (Recommended - 3 agents)
+===============================================================================
+
+9. agent-09-code-reviewer.txt
+   Role: Code Quality & Standards Enforcer
+   Specialization: Code review, security analysis, refactoring, tech debt
+   Use When: Before PR merge, code quality concerns identified
+   Recommended For: Teams with multiple developers
+
+10. agent-10-documentation-specialist.txt
+    Role: Technical Documentation Writer
+    Specialization: API docs, component docs, ADRs, setup guides, troubleshooting
+    Use When: New features need documentation, onboarding new team members
+    Recommended For: Growing teams, open source projects
+
+11. agent-11-migration-specialist.txt
+    Role: Migration & Data Integration Specialist
+    Specialization: Schema migrations, data transformations, zero-downtime deploys
+    Use When: Production data exists, schema evolution needed, zero-downtime critical
+    Recommended For: Mature products with live data
+
+===============================================================================
+RECOMMENDED AGENT ADOPTION SEQUENCE
+===============================================================================
+
+Phase 1 - Start with these 6 core agents:
+  1. react-frontend-expert
+  2. shadcn-ui-expert
+  3. supabase-backend-expert
+  4. state-architect
+  5. business-logic-expert
+  6. database-schema-architect
+
+Phase 2 - Add quality & operations (2 agents):
+  7. testing-qa-specialist
+  8. devops-specialist
+
+Phase 3 - Add as team grows (1-2 agents):
+  9. code-reviewer (when PRs increase)
+  10. documentation-specialist (when onboarding new members)
+
+Phase 4 - Add for production systems (1 agent):
+  11. migration-specialist (when you have live production data)
+
+===============================================================================
+HOW TO USE THESE AGENT DEFINITIONS
+===============================================================================
+
+1. CREATE AGENT IN CLAUDE CODE:
+   - Open Claude Code
+   - Run: /agents
+   - Select "Create new agent"
+   - Copy/paste content from the .txt file
+   - Save agent
+
+2. INVOKE AGENT:
+   - Use /agents command to list available agents
+   - Select agent by number or name
+   - Provide task context from user story
+
+3. AGENT COORDINATION:
+   - Product Owner (you) orchestrates agent workflow
+   - Agents know their handoff points to other agents
+   - Follow the workflow diagrams in agent definitions
+
+===============================================================================
+PROJECT CONTEXT (All agents are configured for this)
+===============================================================================
+
+Project: Cannabis Dispensary POS System
+Architecture: Multi-tenant, franchise-based
+Tech Stack:
+  - Frontend: React 18+, TypeScript, Vite, shadcn/ui, Tailwind CSS
+  - Backend: Supabase (PostgreSQL, Auth, Storage, Real-time)
+  - State: Context API / Zustand
+  - Testing: Vitest, React Testing Library
+  - Deployment: Vercel, GitHub Actions
+
+Key Features:
+  - Tier pricing (unit, half, quarter, eighth)
+  - FIFO batch inventory tracking
+  - Shift management with cash reconciliation
+  - Role-based access (Admin, Manager, Budtender)
+  - Multi-tenant data isolation (RLS policies)
+
+Key Files Referenced by Agents:
+  - docs/architecture/tech-stack.md
+  - docs/architecture/coding-standards.md
+  - docs/architecture/source-tree.md
+  - docs/stories/*.md
+  - supabase/migrations/*.sql
+
+===============================================================================
+AGENT WORKFLOW EXAMPLE: User Story Implementation
+===============================================================================
+
+Story: "As a budtender, I want to add products to cart with tier pricing"
+
+Orchestration Flow (PO coordinates):
+  1. database-schema-architect → Verify schema supports tier pricing
+  2. business-logic-expert → Implement tier pricing calculations
+  3. state-architect → Create cart store with pricing logic
+  4. react-frontend-expert → Build CartItem component
+  5. shadcn-ui-expert → Style component with accessibility
+  6. supabase-backend-expert → Create product service layer
+  7. testing-qa-specialist → Test all layers comprehensively
+  8. devops-specialist → Deploy to preview environment
+  9. code-reviewer → Review PR before merge (optional)
+
+===============================================================================
+QUALITY STANDARDS (All agents enforce these)
+===============================================================================
+
+Code Quality:
+  - TypeScript strict mode (no 'any' types)
+  - ESLint compliance
+  - ≥80% test coverage (≥90% for business logic)
+  - All components have error boundaries
+
+Accessibility:
+  - WCAG 2.1 AA compliance
+  - Color contrast ≥4.5:1 (text), ≥3:1 (UI)
+  - Keyboard navigation support
+  - Screen reader testing (NVDA/JAWS)
+
+Performance:
+  - Lighthouse score ≥90
+  - FCP <1.5s, LCP <2.5s, TTI <3.5s, CLS <0.1
+  - Optimized re-renders (React.memo, useMemo, useCallback)
+  - Code splitting by route
+
+Security:
+  - RLS policies on all tables
+  - Multi-tenant data isolation
+  - No hardcoded secrets
+  - Input validation (Zod schemas)
+
+===============================================================================
+SUPPORT & TROUBLESHOOTING
+===============================================================================
+
+If an agent is not performing as expected:
+  1. Check that you've provided sufficient context from user story
+  2. Verify agent has access to required files (docs/architecture/*, etc.)
+  3. Ensure agent dependencies are met (e.g., schema exists before service layer)
+  4. Review agent's "Key Files to Reference" section
+  5. Check agent's "Workflow" section for proper sequencing
+
+For agent coordination issues:
+  - Review the handoff protocol in each agent's definition
+  - Ensure previous agent has completed deliverables
+  - Verify Product Owner (you) has orchestrated the workflow
+
+===============================================================================
+VERSION INFORMATION
+===============================================================================
+
+Agent Definitions Version: 1.0
+Created For: Cannabis Dispensary POS System
+Methodology: BMAD (Backlog Management & Agile Development)
+Last Updated: 2025-01-10
+Compatible With: Claude Code (latest version)
+
+===============================================================================
+END OF INDEX
+===============================================================================

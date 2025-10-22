@@ -92,7 +92,7 @@ export async function getUserProfile(userId: string): Promise<UserProfile> {
     console.log('[auth.service] Querying users table...');
     console.log('[auth.service] Supabase client state:', {
       hasClient: !!supabase,
-      authHeader: (supabase as any)?.rest?.headers?.Authorization || 'none',
+      authHeader: 'redacted', // Avoid logging auth tokens
     });
 
     // Create query with timeout

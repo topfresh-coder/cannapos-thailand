@@ -1,0 +1,179 @@
+Story Implementation Request: 1.3 - Authentication System
+
+═══════════════════════════════════════════════════════════════
+PREREQUISITES
+═══════════════════════════════════════════════════════════════
+Story Path: docs/stories/1.3.authentication-system.md
+Agents Directory: .claude/agents/*
+
+MCP Tools Available:
+┌─────────────┬──────────────────────────────────────────────┐
+│ Context7    │ Library documentation (Supabase, Next.js)    │
+│ Playwright  │ Browser automation, E2E testing              │
+│ ByteRover   │ Code analysis, file ops, pattern search      │
+└─────────────┴──────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+PHASE 0: CODEBASE RECONNAISSANCE (ByteRover)
+═══════════════════════════════════════════════════════════════
+Before implementation, use ByteRover to:
+
+1. Search for existing auth patterns:
+   - Find: Authentication components, hooks, services
+   - Analyze: Current auth architecture (if any)
+   - Check: Security best practices compliance
+
+2. File structure analysis:
+   - Verify: Recommended directory structure exists
+   - Identify: Where to place new auth files
+   - Detect: Naming conventions in use
+
+3. Security scan:
+   - Search: Hardcoded credentials (should be none)
+   - Find: .env patterns for secrets management
+   - Check: Existing RLS policies (Supabase)
+
+4. Reference code discovery:
+   - Find: Similar features to learn from
+   - Identify: Reusable utilities/helpers
+   - Check: Existing test patterns
+
+Output: Reconnaissance report for planning
+
+═══════════════════════════════════════════════════════════════
+PHASE 1: ANALYSIS & PLANNING
+═══════════════════════════════════════════════════════════════
+5. Read story file and extract:
+   - Requirements
+   - Acceptance criteria (all must be met)
+   - Technical specifications
+   - Dependencies
+
+6. Scan .claude/agents/ for relevant specialists
+
+7. Create TodoWrite with:
+   - Dependency graph (sequential vs parallel)
+   - Phase breakdown with deliverables
+   - Integration points between agents
+   - ByteRover insights incorporated
+
+8. CHECKPOINT: Present plan for approval before execution
+
+═══════════════════════════════════════════════════════════════
+PHASE 2: EXECUTION
+═══════════════════════════════════════════════════════════════
+9. Launch agents with coordination:
+   - Sequential: One at a time, validate before next
+   - Parallel: Single message, multiple Task calls
+
+10. Use MCP tools appropriately:
+
+    Context7:
+    - Resolve: @supabase/auth-helpers-nextjs
+    - Resolve: @supabase/supabase-js (Auth methods)
+    - Get: Next.js middleware patterns
+
+    ByteRover:
+    - Create: New auth service files
+    - Search: Existing code to integrate with
+    - Analyze: File dependencies
+    - Validate: File organization follows standards
+
+    Playwright:
+    - Test: Login flow end-to-end
+    - Test: Protected route access
+    - Test: Session persistence
+
+11. After EACH phase:
+    - Collect deliverables from sub-agents
+    - Use ByteRover to validate file structure
+    - Validate integration points
+    - Update TodoWrite status
+    - CHECK FOR BLOCKERS → If found, HALT and report
+
+═══════════════════════════════════════════════════════════════
+PHASE 3: VALIDATION
+═══════════════════════════════════════════════════════════════
+12. Run comprehensive validation:
+
+    Functional:
+    - All acceptance criteria met (per story)
+    - Test suite passing (≥80% coverage)
+
+    Code Quality:
+    - Zero TypeScript errors
+    - Zero ESLint errors
+    - ByteRover code analysis: No security anti-patterns
+
+    Architecture:
+    - ByteRover file structure check: Follows conventions
+    - No hardcoded secrets (ByteRover scan)
+    - Proper separation of concerns
+
+    UI/UX (if applicable):
+    - Accessibility WCAG AA (Playwright + manual)
+    - Responsive design validated
+
+    Security:
+    - RLS policies tested
+    - Auth tokens handled securely
+    - No credentials in code (ByteRover verify)
+
+13. Integration validation:
+    - Database ↔ Backend: Types match
+    - Backend ↔ Frontend: API contracts fulfilled
+    - State ↔ UI: Store interfaces correct
+    - Use ByteRover to trace dependencies
+
+14. If ANY validation fails:
+    - DO NOT mark story complete
+    - Use ByteRover to analyze failure points
+    - Report specific failures with file locations
+    - Create follow-up tasks
+
+═══════════════════════════════════════════════════════════════
+PHASE 4: COMPLETION
+═══════════════════════════════════════════════════════════════
+15. Update story file:
+    - Status: TODO → COMPLETED
+    - Add implementation_notes section:
+      * Agents used
+      * MCP tools used (Context7, Playwright, ByteRover)
+      * Key implementation decisions
+      * Files created/modified (ByteRover list)
+      * Code analysis report (ByteRover)
+      * Test coverage report
+      * Security scan results (ByteRover)
+      * Any deviations from original plan
+
+16. Generate completion report:
+    - Acceptance criteria checklist (all ✓)
+    - Quality metrics dashboard
+    - ByteRover codebase health score
+    - Known limitations (if any)
+    - Recommendations for next story
+
+═══════════════════════════════════════════════════════════════
+ERROR HANDLING
+═══════════════════════════════════════════════════════════════
+- Agent failure → Halt, report blocker, await resolution
+- Test failure → Fix before proceeding
+- Integration issue → Use ByteRover to analyze, rollback, retry
+- AC not met → Document gap, mark BLOCKED
+- Security issue → Use ByteRover to scan, fix immediately
+- File conflict → ByteRover analysis, resolve conflicts
+
+═══════════════════════════════════════════════════════════════
+PROGRESS REPORTING
+═══════════════════════════════════════════════════════════════
+- Use TodoWrite throughout for visibility
+- Update after each phase
+- Show clear status of all parallel work
+- Report ETA for long-running tasks
+- Include ByteRover analysis insights in updates
+
+═══════════════════════════════════════════════════════════════
+AUTHORIZATION
+═══════════════════════════════════════════════════════════════
+Begin execution now with full validation rigor.
+Start with ByteRover reconnaissance before any implementation.

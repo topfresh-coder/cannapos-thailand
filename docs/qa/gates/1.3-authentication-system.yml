@@ -1,0 +1,42 @@
+schema: 1
+story: '1.3'
+gate: PASS
+status_reason: 'All acceptance criteria met. Login and session persistence working correctly after critical bug fixes.'
+reviewer: 'Quinn'
+updated: '2025-10-13T06:45:00Z'
+top_issues:
+  - id: 'PERF-001'
+    severity: low
+    finding: 'Query timeout warnings during SIGNED_IN event from _recoverAndRefresh()'
+    suggested_action: 'Investigate why SIGNED_IN event profile query times out (non-blocking, P2 priority)'
+    detailed_recommendations:
+      - 'Add telemetry to track query execution times in auth.service.ts getUserProfile()'
+      - 'Consider adding query performance logging to identify slow RLS policy evaluation'
+      - 'Review Supabase dashboard for slow query logs during SIGNED_IN events'
+      - 'Test with production-like data volumes to validate query performance'
+      - 'Consider caching user profile data with short TTL to reduce redundant queries'
+    acceptance_criteria:
+      - 'Query timeout warnings no longer appear in console during auth flow'
+      - 'getUserProfile() completes in <500ms for 95th percentile'
+      - 'All auth events properly handled without redundant profile fetches'
+  - id: 'MNT-001'
+    severity: low
+    finding: 'Extensive debug logging present in production code'
+    suggested_action: 'Remove or reduce debug logging before production deployment'
+    detailed_recommendations:
+      - 'Implement environment-based logging (use import.meta.env.DEV for debug logs)'
+      - 'Create logging utility with configurable log levels (DEBUG, INFO, WARN, ERROR)'
+      - 'Replace console.log() with conditional logger that respects environment'
+      - 'Keep ERROR and WARN level logs for production monitoring'
+      - 'Remove stack trace logging from auth.service.ts line 29 in production builds'
+      - 'Consider integrating Sentry or similar for production error tracking'
+    files_to_update:
+      - 'apps/web/src/contexts/AuthContext.tsx (lines 47-152)'
+      - 'apps/web/src/services/auth.service.ts (lines 28-70)'
+      - 'apps/web/src/lib/supabase.ts (lines 92-96)'
+      - 'apps/web/src/pages/LoginPage.tsx (debug logs if present)'
+    acceptance_criteria:
+      - 'No console.log() statements execute in production builds'
+      - 'Only ERROR and WARN logs appear in production console'
+      - 'Development environment retains full debug logging capability'
+waiver: { active: false }
