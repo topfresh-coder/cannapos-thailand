@@ -1,5 +1,5 @@
 {
-  "buildCommand": "cd apps/web && npx pnpm@8.15.0 run build",
+  "buildCommand": "npx pnpm@8.15.0 run build",
   "installCommand": "npx pnpm@8.15.0 install --no-frozen-lockfile",
   "framework": "vite",
   "outputDirectory": "dist"
