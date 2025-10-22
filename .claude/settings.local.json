@@ -43,7 +43,8 @@
       "Bash(then grep \"VITE_SUPABASE\" apps/web/.env)",
       "Bash(else echo \"apps/web/.env not found\")",
       "Bash(fi)",
-      "Bash(npx --version:*)"
+      "Bash(npx --version:*)",
+      "Bash(git remote add:*)"
     ],
     "deny": [],
     "ask": []
