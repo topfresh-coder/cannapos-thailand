@@ -1,6 +1,6 @@
 {
-  "buildCommand": "pnpm run build",
-  "installCommand": "corepack enable && corepack prepare pnpm@8.15.0 --activate && pnpm install --frozen-lockfile",
+  "buildCommand": "npx pnpm@8.15.0 run build",
+  "installCommand": "npx pnpm@8.15.0 install --frozen-lockfile",
   "framework": "vite",
   "outputDirectory": "apps/web/dist"
 }
