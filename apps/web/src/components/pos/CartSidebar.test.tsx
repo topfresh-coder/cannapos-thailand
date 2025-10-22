@@ -110,7 +110,7 @@ vi.mock('react-router-dom', async () => {
 
 // Mock CartItem component to avoid complex nested testing
 vi.mock('./CartItem', () => ({
-  CartItem: ({ item, onRemove, onUpdateQuantity }: any) => (
+  CartItem: ({ item, onRemove, onUpdateQuantity }: { item: { product: { id: string; name: string }; quantity: number; lineTotal: number }; onRemove: (id: string) => void; onUpdateQuantity: (id: string, quantity: number) => void }) => (
     <div data-testid={`cart-item-${item.product.id}`}>
       <span>{item.product.name}</span>
       <span>Quantity: {item.quantity}</span>

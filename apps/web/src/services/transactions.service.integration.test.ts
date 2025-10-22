@@ -268,7 +268,7 @@ describe.skipIf(skipIntegrationTests)('Transaction Service Integration Tests', (
       expect(txItem.quantity).toBe(5);
 
       // Assert: LIFO allocation - allocated from newest batch (batch2)
-      const allocations = txItem.batch_allocations as any[];
+      const allocations = txItem.batch_allocations as Array<{ batch_id: string; quantity_allocated: number; cost_per_unit: number }>;
       expect(allocations).toHaveLength(1);
       expect(allocations[0].batch_id).toBe(testBatch2Id); // Newest first (LIFO)
       expect(allocations[0].quantity_allocated).toBe(5);
@@ -311,7 +311,7 @@ describe.skipIf(skipIntegrationTests)('Transaction Service Integration Tests', (
 
       // Assert: Allocated from 2 batches (LIFO order: batch2 first, then batch1)
       const txItem = result.transactionItems[0];
-      const allocations = txItem.batch_allocations as any[];
+      const allocations = txItem.batch_allocations as Array<{ batch_id: string; quantity_allocated: number; cost_per_unit: number }>;
       expect(allocations).toHaveLength(2);
 
       // First allocation: batch2 (newest) - fully depleted (15g remaining from previous test)

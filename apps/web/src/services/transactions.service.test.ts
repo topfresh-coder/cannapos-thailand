@@ -89,7 +89,7 @@ const mockTransactionItem: TransactionItem = {
   tare_weight: null,
   override_price: null,
   override_reason: null,
-  batch_allocations: [] as any,
+  batch_allocations: [] as Array<{ batch_id: string; quantity_allocated: number; cost_per_unit: number }>,
   created_at: '2025-01-15T10:30:00Z',
 };
 
