@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Cannabis Dispensary POS System for Thailand",
   "private": true,
+  "packageManager": "pnpm@8.15.0",
   "scripts": {
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
